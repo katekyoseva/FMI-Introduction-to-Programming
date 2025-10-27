@@ -146,6 +146,31 @@ int main()
 
     std::cout << biggestDivider;*/
 
+    //Task 5 -> optimised
+    /*int a, b;
+        std::cin >> a >> b;
+
+        if (b < a)
+        {
+            int temp = a;
+            a = b;
+            b = temp;
+        }
+
+        while (true)
+        {
+            int remainder = a % b;
+            a = b;
+
+            if (remainder == 0)
+            {
+                break;
+            }
+            b = remainder;
+        }
+
+        std::cout << b;*/
+
     //Task 6
     /*int a, b;
 
