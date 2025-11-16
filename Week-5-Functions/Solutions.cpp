@@ -1,5 +1,4 @@
 ﻿#include <iostream>
-#include "Solutions.h"
 
 //Task 1
 int powerOfNumber(int num, int power)
