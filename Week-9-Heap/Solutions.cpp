@@ -245,13 +245,21 @@ void printMatrix(int** matrix, int rows, int cols)
     }
 }
 //Task 7
+bool isValidSymbol(char symbol)
+{
+    return (
+        (symbol >= 'a') && (symbol <= 'z')
+        || (symbol >= 'A') && (symbol <= 'Z')
+        || (symbol >= '1') && (symbol <= '9')
+        );
+}
 char* rewriteArray(char* str)
 {
     int counter = 0;
 
     for (int i = 0; str[i] != '\0'; i++)
     {
-        if ((str[i] >= '0' && str[i] <= '9') || (str[i] >= 'a' && str[i] <= 'z') || (str[i] >= 'A' && str[i] <= 'Z'))
+        if (isValidSymbol)
         {
             counter++;
         }
@@ -261,7 +269,7 @@ char* rewriteArray(char* str)
 
     for (int i = 0; str[i] != '\0'; i++)
     {
-        if ((str[i] >= '0' && str[i] <= '9') || (str[i] >= 'a' && str[i] <= 'z') || (str[i] >= 'A' && str[i] <= 'Z'))
+        if (isValidSymbol)
         {
             if (resultPosition < counter)
             {
@@ -273,7 +281,46 @@ char* rewriteArray(char* str)
     return result;
 }
 
-//Task 11
+//Task 8
+void pushBack(int*& arr, int& size, int& cap, int num)
+{
+    if (size == cap)
+    {
+        cap = cap * 2 > 0 ? cap * 2 : 1;
+        int* newArr = new int[cap] {};
+        for (int i = 0; i < size; i++)
+        {
+            newArr[i] = arr[i];
+        }
+        delete[] arr;
+        arr = newArr;
+    }
+
+    arr[size++] = num;
+}
+
+//Task 9
+void popBack(int*& arr, int& size, int& cap)
+{
+    if (size == 0)
+        return;
+    arr[size - 1] = 0;
+    size--;
+
+    if (size * 4 <= cap)
+    {
+        cap = cap / 2 > 0 ? cap / 2 : 1;
+        int* newArr = new int[cap] {};
+        for (int i = 0; i < size; i++)
+        {
+            newArr[i] = arr[i];
+        }
+        delete[] arr;
+        arr = newArr;
+    }
+}
+
+//Task 10
 void componentsCounter(char* dir, int& count)
 {
     for (int i = 0; dir[i] != '\0'; i++)
@@ -298,6 +345,7 @@ char** separateDirectories(char* dir, int& count)
 {
     int position = 0;
     char** dirs = new char* [count] {};
+
     for (int i = 0; i < count; i++)
     {
         int length = 0;
@@ -436,9 +484,36 @@ int main()
     printArray(result);
 
     delete[] result;*/
+    
+    //Task 8
+   /* int capacity = 2;
+    int size = 0;
+    int* arr = new int[capacity];
 
-    //Task 11
-    char str[MAX_LENGTH];
+    pushBack(arr, size, capacity, 5);
+    pushBack(arr, size, capacity, 15);
+    pushBack(arr, size, capacity, 25);
+
+    printArray(arr, size);
+
+    delete[] arr;*/
+
+    //Task 9
+    /*int capacity = 8;
+    int size = 6;
+    int* arr = new int[capacity] {1, 2, 3, 4, 5, 6, 0, 0};
+
+    popBack(arr, size, capacity);
+    popBack(arr, size, capacity);
+    popBack(arr, size, capacity);
+    popBack(arr, size, capacity);
+
+    printArray(arr, size);
+
+    delete[] arr;*/
+
+    //Task 10
+    /*char str[MAX_LENGTH];
     std::cin >> str;
 
     int componentsCount = 0;
@@ -456,5 +531,68 @@ int main()
          delete[] dirs[i];
     }
 
-    delete[] dirs;
+    delete[] dirs;*/
+
+    //Task 12
+    /*int n;
+    std::cin >> n;
+
+    if (n < 4 || n % 2 != 0)
+        return 0;
+
+    int** matrix = getMatrix(n, n);
+    fillMatrix(matrix, n, n);
+
+    int subMatrixSize = n / 2;
+
+    int** matrix1 = getMatrix(subMatrixSize, subMatrixSize);
+    int** matrix2 = getMatrix(subMatrixSize, subMatrixSize);
+    int** matrix3 = getMatrix(subMatrixSize, subMatrixSize);
+    int** matrix4 = getMatrix(subMatrixSize, subMatrixSize);
+
+    for (int i = 0; i < subMatrixSize; i++)
+    {
+        for (int j = 0; j < subMatrixSize; j++)
+        {
+            matrix1[i][j] = matrix[i][j];
+        }
+    }
+
+    for (int i = 0; i < subMatrixSize; i++)
+    {
+        for (int j = 0; j < subMatrixSize; j++)
+        {
+            matrix2[i][j] = matrix[i][j + subMatrixSize];
+        }
+    }
+
+    for (int i = 0; i < subMatrixSize; i++)
+    {
+        for (int j = 0; j < subMatrixSize; j++)
+        {
+            matrix3[i][j] = matrix[i + subMatrixSize][j];
+        }
+    }
+
+    for (int i = 0; i < subMatrixSize; i++)
+    {
+        for (int j = 0; j < subMatrixSize; j++)
+        {
+            matrix4[i][j] = matrix[i + subMatrixSize][j + subMatrixSize];
+        }
+    }
+
+    printMatrix(matrix1, subMatrixSize, subMatrixSize);
+    std::cout << '\n';
+    printMatrix(matrix2, subMatrixSize, subMatrixSize);
+    std::cout << '\n';
+    printMatrix(matrix3, subMatrixSize, subMatrixSize);
+    std::cout << '\n';
+    printMatrix(matrix4, subMatrixSize, subMatrixSize);
+
+    delete[] matrix;
+    delete[] matrix1;
+    delete[] matrix2;
+    delete[] matrix3;
+    delete[] matrix4;*/
 }
