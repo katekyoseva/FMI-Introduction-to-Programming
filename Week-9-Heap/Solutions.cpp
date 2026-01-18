@@ -259,7 +259,7 @@ char* rewriteArray(char* str)
 
     for (int i = 0; str[i] != '\0'; i++)
     {
-        if (isValidSymbol)
+        if (isValidSymbol(str[i]))
         {
             counter++;
         }
@@ -269,7 +269,7 @@ char* rewriteArray(char* str)
 
     for (int i = 0; str[i] != '\0'; i++)
     {
-        if (isValidSymbol)
+        if (isValidSymbol(str[i]))
         {
             if (resultPosition < counter)
             {
